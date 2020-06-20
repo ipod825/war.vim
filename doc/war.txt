@@ -1,0 +1,52 @@
+war*.txt* Windo Auto Resize on demand.
+                                                                        *war*
+    ██╗    ██╗ █████╗ ██████╗   ██╗   ██╗██╗███╗   ███╗
+    ██║    ██║██╔══██╗██╔══██╗  ██║   ██║██║████╗ ████║
+    ██║ █╗ ██║███████║██████╔╝  ██║   ██║██║██╔████╔██║
+    ██║███╗██║██╔══██║██╔══██╗  ╚██╗ ██╔╝██║██║╚██╔╝██║
+    ╚███╔███╔╝██║  ██║██║  ██║██╗╚████╔╝ ██║██║ ╚═╝ ██║
+     ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═══╝  ╚═╝╚═╝     ╚═╝
+===============================================================================
+CONTENTS				        *war-help-contents*
+
+Introduction    |war-introduction|
+Functions       |war-functions|
+Configurations  |war-configurations|
+
+==============================================================================
+INTRODUCTION				    *war-introduction*
+
+War.vim let user decide when to resize certain buffer automatically.
+
+==============================================================================
+Functions				        *war-functions*
+
+                                *war#fire*
+war#fire(width_enter, height_enter, width_leave, height_leave)
+	Register the current buffer to be autoresized on |WinEnter| and
+	|WinLeave|. All the four parameters are |Float| between 0 and 1. When
+	resizing, they are multiplied by the window width (|columns|) and the
+	window height (|lines|) respectively. If a parameter is smaller than
+	0, the window will be resized to the width/height when the buffer is
+	created.
+
+>
+    augroup WAR
+        autocmd!
+    	" Maximize/Minimize quickfix window's height
+        autocmd Filetype qf :call war#fire(-1, 0.8, -1, 0.2)
+    	" Maximize/Minimize fugitive window's height
+        autocmd Filetype fugitive :call war#fire(-1, 1, -1, 0)
+    augroup END
+
+==============================================================================
+Configurations				    *war-configurations*
+
+                                *g:war_override_min_width_height*
+g:war_override_min_width_height            boolean (default v:true)
+    If set to v:false, war will not override your |winwidth|, |winheight|,
+    |winminwidth|, and |winminheight|. It is recommended levaing this to true
+    as otherwise window width and height might not fully controled by war.
+
+==============================================================================
+vim:tw=78:et:ft=help:norl:
