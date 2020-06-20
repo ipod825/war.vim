@@ -9,6 +9,7 @@ function! war#fire(...)
     let b:war_width_leave = a:3>=0? float2nr(a:3 * &columns) : winwidth(0)
     let b:war_height_leave = a:4>=0? float2nr(a:4 * &lines) : winheight(0)
     autocmd WinEnter <buffer> call war#enter(-1)
+    autocmd BufEnter <buffer> call war#enter(-1)
     autocmd WinLeave <buffer> call war#leave()
     call timer_start(1, function('war#enter'))
 endfunction
