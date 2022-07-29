@@ -38,6 +38,9 @@ function! war#enter(timer)
 endfunction
 
 function! war#leave()
+    if !b:war_fired
+        return
+    endif
     exec 'vertical resize '.b:war_width_leave
     if war#can_resize_height()
         exec 'resize '.b:war_height_leave
