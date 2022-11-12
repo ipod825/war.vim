@@ -30,7 +30,10 @@ function! war#can_resize_height()
     retur l:res
 endfunction
 
-function! war#enter(timer)
+function! war#enter()
+    if !exists('b:war_fired')
+      return
+    endif
     exec 'vertical resize '.b:war_width_enter
     if war#can_resize_height()
         exec 'resize '.b:war_height_enter
